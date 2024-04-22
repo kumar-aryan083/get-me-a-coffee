@@ -1,11 +1,11 @@
 "use client"
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const Navbar = () => {
-    const router = useRouter();
+    // const router = useRouter();
     // const [showdropdown, setShowdropdown] = useState(false)
     const { data: session } = useSession()
     return (
@@ -21,7 +21,7 @@ const Navbar = () => {
                     <Link href={"/dashboard"}>
                         <li className='mx-2 cursor-pointer'>Dashboard</li>
                     </Link>
-                    <Link href={"#"}>
+                    <Link href={"/username"}>
                         <li className='mx-2 cursor-pointer'>Your Page</li>
                     </Link>
                     <Link href={"#"} onClick={() => { signOut() }}>
