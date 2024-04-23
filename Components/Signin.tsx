@@ -1,18 +1,22 @@
 "use client"
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Signin() {
     const router = useRouter();
     const { data: session } = useSession();
-    if (session) {
-        router.push("/dashboard")
-    }
+    useEffect(() => {
+        if (session) {
+            router.push("/dashboard")
+        }
+    }, [router, session])
+
     return <div className='text-white container mx-auto py-14'>
         <h1 className='font-bold text-3xl text-center'>Login to get your fans to support you</h1>
         <div className="flex flex-col gap-2 min-h-screen items-center  p-10">
 
-            <button onClick={() => { signIn("google") }}
+            <button onClick={async () => { await signIn("google") }}
                 className="flex items-center w-64 bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                 <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                     viewBox="-0.5 0 48 48" version="1.1">
@@ -38,7 +42,7 @@ export default function Signin() {
                 <span>Continue with Google</span>
             </button>
 
-            <button onClick={() => { signIn("github") }}
+            <button onClick={async () => { await signIn("github") }}
                 className="flex items-center w-64 bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:rinSg-2 focus:ring-offset-2 focus:ring-gray-500">
                 <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                     viewBox="0 0 73 73" version="1.1">
