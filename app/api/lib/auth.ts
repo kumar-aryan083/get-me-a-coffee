@@ -1,11 +1,10 @@
-import prisma from "@/prisma";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-// import { PrismaAdapter } from "@next-auth/prisma-adapter";
-// import type { Adapter } from "next-auth/adapters";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/prisma";
 
 export const authOptions = {
-  // adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: PrismaAdapter(prisma),
   providers: [
     // OAuth authentication providers...
     GitHubProvider({
@@ -18,12 +17,12 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  // callbacks: {
-  //   async signIn({ user, account, profile, email, credentials }: any) {
-  //     if (account.provider === "google") {
-  //       console.log(profile);
-  //     }
-  //     return true;
-  //   },
-  // },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }: any) {
+      if (account.provider == "google" || account.provider == "github") {
+        console.log(profile);
+      }
+      return profile;
+    },
+  },
 };
