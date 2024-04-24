@@ -17,26 +17,7 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async signIn({ user, account, profile, email, credentials }: any) {
-      if (account.provider == "google" || account.provider == "github") {
-        console.log(profile);
-        const existingUser = await prisma.user.findUnique({
-          where: {
-            email: profile.email,
-          },
-        });
-        if (!existingUser) {
-          const newuser = await prisma.user.create({
-            data: {
-              email: profile.email,
-              name: profile.name,
-              image: profile.avatar_url,
-            },
-          });
-        }
-      }
-      return true;
-    },
-  },
+  // callbacks: {
+  //
+  // },
 };
