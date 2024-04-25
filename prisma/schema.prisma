@@ -43,6 +43,7 @@ model User {
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  payments      Payment[]
   accounts      Account[]
   sessions      Session[]
 }
@@ -66,4 +67,6 @@ model Payment{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   done Boolean @default(false)
+  userId String 
+  user User @relation(fields: [userId], references: [id])
 }

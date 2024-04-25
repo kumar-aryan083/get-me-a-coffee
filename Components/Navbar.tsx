@@ -21,7 +21,7 @@ const Navbar = () => {
                     <Link href={"/dashboard"}>
                         <li className='mx-2 cursor-pointer'>Dashboard</li>
                     </Link>
-                    <Link href={"/username"}>
+                    <Link href={`/${session?.user?.email?.split("@")[0]}`}>
                         <li className='mx-2 cursor-pointer'>Your Page</li>
                     </Link>
                     <Link href={"#"} onClick={() => { signOut() }}>
