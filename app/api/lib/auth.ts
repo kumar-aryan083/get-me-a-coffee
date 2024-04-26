@@ -19,10 +19,10 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  // callbacks: {
-  //   async session({ session, token }: any) {
-  //     session.user.id = token.sub;
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async session({ session, token }: any) {
+      session.user.id = token.sub;
+      return session;
+    },
+  },
 };
